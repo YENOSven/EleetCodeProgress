@@ -5,46 +5,25 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        count = 0
-        lnode = ListNode(0, None)
-        d = lnode
-
-        d1 = []
-        d2 = []
-
-        carry = 0
-
-        while (l1 != None or l2 != None):
-            if (l1 == None):
-                d1.append(0)
-            else:
-                d1.append(l1.val)
-            if (l1 != None):
-                l1 = l1.next
-
-            if (l2 == None):
-                d2.append(0)
-            else:
-                d2.append(l2.val)
-            if (l2 != None):
-                l2 = l2.next
-
-            if (d1[count] + d2[count] + carry >= 10):
-                lnode.val = (d1[count]+d2[count]+carry)%10
-                carry = 1
-            else:
-
-                lnode.val = d1[count]+d2[count]+carry
-                carry = 0
-
-            count += 1
-
-            if (l1 != None or l2 != None or carry == 1):
-                lnode.next = ListNode(0,None)
-                if (carry == 1):
-                    lnode.next.val = 1
-                lnode = lnode.next
-
-        return d
+        s1 = ''
+        s2 = ''
+        c1 = l1
+        c2 = l2
+        while c1 is not None:
+            s1 += str(c1.val)
+            c1 = c1.next 
+        while c2 is not None:
+            s2 += str(c2.val)
+            c2 = c2.next
+        s3 = str(int(s1[::-1]) + int(s2[::-1]))[::-1]
+        print(s3)
+        h = ListNode(int(s3[0]))
+        s3 = s3[1:]
+        curr = h
+        while s3 != '':
+            curr.next = ListNode(int(s3[0]))
+            s3 = s3[1:]
+            curr = curr.next 
+        return h
             
         
